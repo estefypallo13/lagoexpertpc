@@ -43,6 +43,14 @@ import CyberServices from "./components/CyberServices";
 import LightboxModal from "./components/LightboxModal";
 import LagoExpertLogo from "./components/LagoExpertLogo";
 
+// Import image assets so that Vite processes and bundles them for production
+import epsonMinInksImg from "./assets/images/epson_544_inks_set_1780017725073.png";
+import geniusMouseImg from "./assets/images/genius_mouse_nx7007_png_1780095087125.png";
+import mouseInalambricoImg from "./assets/images/mouse_inalambrico_10_00_1780097360929.png";
+import tecladoQuasadImg from "./assets/images/teclado_quasad_10_00_1780097377386.png";
+import flashMemoryImg from "./assets/images/flash_memory_16gb_1780096972830.png";
+import resmaPapelImg from "./assets/images/resma_papel_3_50_1780096987801.png";
+
 const GeniusMouseSvg = ({ className = "w-28 h-28" }: { className?: string }) => (
   <svg viewBox="0 0 200 240" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="100" cy="205" rx="55" ry="15" fill="black" fillOpacity="0.3" />
@@ -516,7 +524,7 @@ export default function App() {
                   </span>
 
                   <img 
-                    src="/src/assets/images/epson_544_inks_set_1780017725073.png" 
+                    src={epsonMinInksImg} 
                     alt="Colección de 4 Tintas Epson CMYK" 
                     className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(13,71,161,0.2)] group-hover/ink:scale-105 transition-transform duration-500"
                     referrerPolicy="no-referrer"
@@ -537,7 +545,7 @@ export default function App() {
                   </span>
                   
                   <img 
-                    src="/src/assets/images/genius_mouse_nx7007_png_1780095087125.png" 
+                    src={geniusMouseImg} 
                     alt="Mouse Wireless Genius NX-7007 Rojo/Negro" 
                     className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(220,38,38,0.2)] group-hover/mouse:scale-105 transition-transform duration-500 rounded-xl"
                     referrerPolicy="no-referrer"
@@ -559,7 +567,7 @@ export default function App() {
                   </span>
                   
                   <img 
-                    src="/src/assets/images/mouse_inalambrico_10_00_1780097360929.png" 
+                    src={mouseInalambricoImg} 
                     alt="Mouse Inalámbrico Premium Ergonómico" 
                     className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(13,148,136,0.2)] group-hover/wirelessmouse:scale-105 transition-transform duration-500 rounded-xl"
                     referrerPolicy="no-referrer"
@@ -581,7 +589,7 @@ export default function App() {
                   </span>
                   
                   <img 
-                    src="/src/assets/images/teclado_quasad_10_00_1780097377386.png" 
+                    src={tecladoQuasadImg} 
                     alt="Teclado Quasad Español" 
                     className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(217,119,6,0.2)] group-hover/keyboard:scale-105 transition-transform duration-500 rounded-xl"
                     referrerPolicy="no-referrer"
@@ -603,7 +611,7 @@ export default function App() {
                   </span>
                   
                   <img 
-                    src="/src/assets/images/flash_memory_16gb_1780096972830.png" 
+                    src={flashMemoryImg} 
                     alt="Flash Memory Kingston 16GB CD-ROM" 
                     className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(16,185,129,0.2)] group-hover/flash:scale-105 transition-transform duration-500 rounded-xl"
                     referrerPolicy="no-referrer"
@@ -625,7 +633,7 @@ export default function App() {
                   </span>
                   
                   <img 
-                    src="/src/assets/images/resma_papel_3_50_1780096987801.png" 
+                    src={resmaPapelImg} 
                     alt="Resma de Papel A4 Report Premium" 
                     className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(99,102,241,0.2)] group-hover/paper:scale-105 transition-transform duration-500 rounded-xl"
                     referrerPolicy="no-referrer"
@@ -1658,7 +1666,7 @@ export default function App() {
       <LightboxModal
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
-        imageSrc="/src/assets/images/epson_544_inks_set_1780017725073.png"
+        imageSrc={epsonMinInksImg}
         imageAlt="Set de 4 Tintas Epson CMYK en LAGO EXPERT PC"
       />
 
