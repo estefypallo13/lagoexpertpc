@@ -16,7 +16,12 @@ import {
   Layers,
   Camera,
   Wrench,
-  Sparkles
+  Sparkles,
+  HeartHandshake,
+  Scale,
+  Zap,
+  Leaf,
+  CreditCard
 } from "lucide-react";
 import { motion } from "motion/react";
 import LagoExpertLogo from "./LagoExpertLogo";
@@ -26,14 +31,123 @@ interface CyberServicesProps {
 }
 
 export default function CyberServices({ whatsappNumber = "593988384767" }: CyberServicesProps) {
-  const services = [
+  interface RateItem {
+    label: string;
+    value: string;
+  }
+
+  interface ServiceItem {
+    icon: React.ReactNode;
+    iconBg: string;
+    title: string;
+    description: string;
+    popular?: boolean;
+    badge?: string;
+    price?: string;
+    priceLabel?: string;
+    rates?: RateItem[];
+  }
+
+  const services: ServiceItem[] = [
+    {
+      icon: <Scale className="w-6 h-6 text-[#E65100]" />,
+      iconBg: "bg-[#FFEBE0] border-[#FFCCBC]",
+      title: "Trámites SRI (Declaraciones y RUC)",
+      description: "Asesoría en inscripción de RIMPE, facturación electrónica para tu negocio, declaraciones mensuales/semestrales del IVA, consulta y obtención de clave del SRI sin demoras.",
+      price: "$1.50",
+      priceLabel: "Declaración en 0",
+      popular: true,
+      badge: "SRI Oficial"
+    },
+    {
+      icon: <HeartHandshake className="w-6 h-6 text-[#0D47A1]" />,
+      iconBg: "bg-[#B3E5FC] border-[#81D4FA]",
+      title: "Trámites IESS (Certificados y Préstamos)",
+      description: "Generación de mecanizado de aportaciones, claves de afiliado, consultas de fondos de reserva, solicitudes de préstamos quirografarios y trámites patronales en línea.",
+      price: "$0.50",
+      priceLabel: "Consulta de Mecanizado",
+      popular: true,
+      badge: "IESS Express"
+    },
+    {
+      icon: <FileText className="w-6 h-6 text-[#E65100]" />,
+      iconBg: "bg-[#FFEBE0] border-[#FFCCBC]",
+      title: "Redacción de Solicitudes u Oficios",
+      description: "Informes estructurados, correspondencia, oficios formales y solicitudes dirigidas a entidades escolares o públicas con redacción profesional.",
+      price: "$1.00",
+      priceLabel: "Elaboración de Oficio",
+      popular: true,
+      badge: "Recomendado"
+    },
+    {
+      icon: <ShieldCheck className="w-6 h-6 text-[#B71C1C]" />,
+      iconBg: "bg-[#FFEBEE] border-[#FFCDD2]",
+      title: "Consulta de Récord Policial",
+      description: "Obtención inmediata del Certificado de Antecedentes Penales del Ministerio de Gobierno. Listo para imprimir en alta definición.",
+      rates: [
+        { label: "Blanco y Negro (B/N)", value: "$0.50" },
+        { label: "Impresión a Color", value: "$1.00" }
+      ],
+      popular: false
+    },
+    {
+      icon: <Zap className="w-6 h-6 text-emerald-800" />,
+      iconBg: "bg-[#E8F5E9] border-[#C8E6C9]",
+      title: "Recargas de Celular & Paquetes Directos",
+      description: "Recargas estables de saldo al instante para todas las operadoras del Ecuador: Claro, Movistar, CNT y Tuenti. Activación directa de combos de megas y minutos.",
+      popular: false
+    },
+    {
+      icon: <Leaf className="w-6 h-6 text-emerald-700" />,
+      iconBg: "bg-emerald-50 border-emerald-250",
+      title: "Guías de Ambiente y Movilización Forestal",
+      description: "Asesoría completa para trámites de guías de movilización forestal en el sistema SAF del Ministerio del Ambiente (MAATE). Registro de predios y trámites ambientales locales para Lago Agrio.",
+      popular: false
+    },
+    {
+      icon: <CreditCard className="w-6 h-6 text-indigo-700" />,
+      iconBg: "bg-[#E8EAF6] border-indigo-150",
+      title: "Pago de Servicios Públicos y Planillas",
+      description: "Realizamos el pago seguro de planillas de luz de CNEL, servicio de agua potable de Lago Agrio, tasas de la ANT, matrículas automotrices y multas estatales de manera directa.",
+      popular: false
+    },
     {
       icon: <FileText className="w-6 h-6 text-[#0D47A1]" />,
-      iconBg: "bg-[#E3F2FD] border-[#BBDEFB]",
-      title: "Trabajos Escolares e Investigaciones",
-      description: "Realizamos consultas académicas, resúmenes organizados, diapositivas, proyectos, ensayos y tareas escolares a tiempo y con formato formal impecable.",
+      iconBg: "bg-[#B3E5FC] border-[#81D4FA]",
+      title: "Trabajos de Escuelas y Colegios",
+      description: "Realizamos consultas académicas rápidas, resúmenes organizados, transcripciones, ensayos, diseño de diapositivas y tareas escolares a tiempo con presentación impecable.",
+      price: "$1.00",
+      priceLabel: "Tarifa Base",
       popular: true,
-      badge: "El más solicitado"
+      badge: "Escolar"
+    },
+    {
+      icon: <Layers className="w-6 h-6 text-[#E65100]" />,
+      iconBg: "bg-[#FFEBE0] border-[#FFCCBC]",
+      title: "Proyectos de Colegios (Grado y Monografías)",
+      description: "Asesoría, formateo y estructuración de Proyectos de Grado, Estudios de Caso de Bachillerato y monografías escolares bajo normas APA profesionales.",
+      price: "Asesoría de Calidad",
+      priceLabel: "Estructuración",
+      popular: true,
+      badge: "Especialidad"
+    },
+    {
+      icon: <Scale className="w-6 h-6 text-indigo-700" />,
+      iconBg: "bg-indigo-50 border-indigo-200",
+      title: "Trámites Contraloría del Estado",
+      description: "Generación ágil del Certificado de No tener Impedimento para ejercer Cargo Público, así como consultas del estado patrimonial y deudores del Estado en línea.",
+      price: "$1.00",
+      priceLabel: "Certificado",
+      popular: false
+    },
+    {
+      icon: <HeartHandshake className="w-6 h-6 text-pink-700" />,
+      iconBg: "bg-pink-50 border-pink-100",
+      title: "Referencias & Certificados de Honorabilidad",
+      description: "Redacción formal y profesional de Referencias Comerciales, Referencias Laborales y Certificaciones personales de Honorabilidad listas para tu carpeta de empleo.",
+      price: "$1.00",
+      priceLabel: "Por Certificado",
+      popular: false
     },
     {
       icon: <Printer className="w-6 h-6 text-[#E65100]" />,
@@ -43,26 +157,12 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
       popular: false
     },
     {
-      icon: <Smartphone className="w-6 h-6 text-[#1B5E20]" />,
-      iconBg: "bg-[#E8F5E9] border-[#C8E6C9]",
-      title: "Recargas de Celular & Paquetes",
-      description: "Recargas estables e instantáneas para todas las compañías: Claro, Movistar, CNT, Tuenti. ¡Activa tus paquetes de datos hoy mismo!",
+      icon: <ShieldCheck className="w-6 h-6 text-[#B71C1C]" />,
+      iconBg: "bg-[#FFEBEE] border-[#FFCDD2]",
+      title: "Mantenimiento de Sistemas de Tinta",
+      description: "Expulsión de burbujas de aire, limpieza de cabezales Epson Ecotank obstruidos y purga del sistema continuo de tintas para mantener tus impresiones perfectas.",
       popular: true,
-      badge: "Todas las marcas"
-    },
-    {
-      icon: <Globe2 className="w-6 h-6 text-[#4A148C]" />,
-      iconBg: "bg-[#F3E5F5] border-[#E1BEE7]",
-      title: "Trámites Públicos en Línea (SRI/IESS/AMT)",
-      description: "Consultas de multas de tránsito, turnos de matriculación, facturación electrónica básica, certificados penales e historial de aportaciones.",
-      popular: false
-    },
-    {
-      icon: <Layers className="w-6 h-6 text-[#FF6F00]" />,
-      iconBg: "bg-[#FFF8E1] border-[#FFE082]",
-      title: "Venta de Accesorios Tecnológicos",
-      description: "Mouses ergonómicos ópticos, cables USB reforzados, cargadores rápidos, teclados en español, pendrives, audífonos y repuestos básicos.",
-      popular: false
+      badge: "Especialistas"
     },
     {
       icon: <Wrench className="w-6 h-6 text-[#006064]" />,
@@ -72,8 +172,8 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
       popular: false
     },
     {
-      icon: <Check className="w-6 h-6 text-[#1A237E]" />,
-      iconBg: "bg-[#E8EAF6] border-[#C5CAE9]",
+      icon: <Layers className="w-6 h-6 text-[#FF6F00]" />,
+      iconBg: "bg-[#FFF8E1] border-[#FFE082]",
       title: "Anillados & Plastificados de Documentos",
       description: "Encuadernación de tesis y tareas con tapas plásticas de alta resistencia. Plastificación rígida protectora para cédulas, licencias y matrículas.",
       popular: false
@@ -83,21 +183,6 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
       iconBg: "bg-[#FCE4EC] border-[#F8BBD0]",
       title: "Fotos Tamaño Carnet al Instante",
       description: "Captura y edición fotográfica inmediata para tus trámites, matrículas estudiantiles, solicitudes de empleo, impresas en papel brillante de alta gama.",
-      popular: false
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6 text-[#B71C1C]" />,
-      iconBg: "bg-[#FFEBEE] border-[#FFCDD2]",
-      title: "Mantenimiento de Sistemas de Tinta",
-      description: "Expulsión de burbujas de aire, limpieza de cabezales Epson Ecotank obstruidos y purga del sistema continuo de tintas para mantener tus impresiones perfectas.",
-      popular: true,
-      badge: "Especialidad"
-    },
-    {
-      icon: <Laptop className="w-6 h-6 text-[#37474F]" />,
-      iconBg: "bg-[#ECEFF1] border-[#CFD8DC]",
-      title: "Consultas y Descargas Generales",
-      description: "Búsqueda web guiada en portales públicos, descargas seguras de formularios escolares, impresión de comprobantes de pago y facturas.",
       popular: false
     }
   ];
@@ -111,15 +196,15 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
         
         {/* Header content with beautiful pastels */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="inline-flex items-center gap-1 px-4 py-1.5 bg-[#FFF3EC] border border-[#FFD8BF] text-[#E65100] text-xs font-black tracking-widest uppercase rounded-full shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Soluciones del Día a Día
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#E8F5E9] border border-[#C8E6C9] text-emerald-800 text-xs font-black tracking-widest uppercase rounded-full shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 animate-pulse text-emerald-600" /> Servicios Especializados
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">
-            ¡Mucho más que un Cyber! <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E65100] via-[#D81B60] to-[#0D47A1]">Todo lo que Hacemos y Resolvemos por Ti</span>
+            Servicios Profesionales de Cyber e Impresión <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] via-[#E65100] to-[#D81B60]">Soluciones de Alta Calidad y Confianza Total</span>
           </h2>
-          <p className="text-slate-600 md:text-lg leading-relaxed font-light">
-            En nuestro punto físico de Lago Agrio encuentras ayuda experta para tus consultas académicas, trámites gubernamentales, consumibles informáticos y reparaciones con la calidez de siempre.
+          <p className="text-slate-650 md:text-lg leading-relaxed font-light">
+            En nuestro punto físico de Lago Agrio encuentras ayuda experta y herramientas profesionales para tus consultas académicas, trámites gubernamentales oficiales, reparaciones y consumibles.
           </p>
         </div>
 
@@ -127,19 +212,19 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((svc, index) => (
             <motion.div
-              whileHover={{ y: -6, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.03), 0 8px 10px -6px rgb(0 0 0 / 0.02)" }}
-              transition={{ duration: 0.2 }}
+              whileHover={{ y: -8, boxShadow: "0 25px 30px -5px rgb(230 81 0 / 0.06), 0 10px 15px -6px rgb(13 71 161 / 0.04)" }}
+              transition={{ duration: 0.25 }}
               key={index}
-              className={`bg-white border rounded-3xl p-6 md:p-8 flex flex-col justify-between relative transition-all ${
+              className={`border rounded-3xl p-6 md:p-8 flex flex-col justify-between relative transition-all ${
                 svc.popular 
-                  ? "border-[#FFCCBC]/70 ring-1 ring-[#FFCCBC]/20 shadow-md shadow-[#FFEBE0]/50" 
-                  : "border-slate-100 hover:border-slate-200"
+                  ? "border-[#FFB997] bg-gradient-to-b from-white to-[#FFF6F0] ring-2 ring-[#FFD8BF]/40 shadow-md shadow-[#E64A19]/5" 
+                  : "border-slate-150 bg-white hover:border-slate-300 shadow-sm"
               }`}
             >
               <div>
                 {/* Popular badges */}
                 {svc.popular && (
-                  <span className="absolute top-4 right-4 bg-[#FFEBE0] text-[#E65100] border border-[#FFCCBC] font-extrabold text-[9px] uppercase px-2.5 py-1 rounded-full tracking-wider">
+                  <span className="absolute top-4 right-4 bg-gradient-to-r from-[#E65100] to-orange-500 text-white font-extrabold text-[10px] uppercase px-3.5 py-1.5 rounded-full tracking-wider shadow-sm">
                     {svc.badge}
                   </span>
                 )}
@@ -154,6 +239,30 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
                 <p className="text-slate-600 text-sm leading-relaxed font-normal">
                   {svc.description}
                 </p>
+
+                {/* Custom Rates / Pricing Info */}
+                {svc.price && (
+                  <div className="mt-4 p-2.5 bg-[#FFF9F5] border border-[#FFD8BF]/45 rounded-xl flex items-center justify-between">
+                    <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{svc.priceLabel || "Tarifa"}</span>
+                    <span className="text-xs font-black text-[#E65100] bg-[#FFF3EC] border border-[#FFD8BF] px-2.5 py-1 rounded-lg">
+                      {svc.price}
+                    </span>
+                  </div>
+                )}
+
+                {svc.rates && (
+                  <div className="mt-4 space-y-1.5">
+                    <span className="text-[9px] text-[#0D47A1] font-bold uppercase tracking-wider block">Tarifas del servicio</span>
+                    <div className="grid grid-cols-2 gap-2">
+                      {svc.rates.map((rate, rIdx) => (
+                        <div key={rIdx} className="p-2 bg-[#B3E5FC]/45 border border-blue-200 rounded-xl text-center">
+                          <span className="block text-[8px] text-slate-400 font-extrabold uppercase leading-none mb-1">{rate.label}</span>
+                          <span className="text-xs font-black text-[#0D47A1]">{rate.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Fast Direct Action */}
@@ -174,7 +283,7 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
         </div>
 
         {/* Dynamic Pastel Callout instead of dark block */}
-        <div className="mt-16 bg-gradient-to-r from-[#FFF5EE] via-[#E8F5E9] to-[#E3F2FD] text-slate-800 rounded-3xl p-8 md:p-10 border border-[#FFE0D3]/70 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-sm">
+        <div className="mt-16 bg-gradient-to-r from-[#FFF5EE] via-[#E8F5E9] to-[#B3E5FC] text-slate-800 rounded-3xl p-8 md:p-10 border border-[#FFE0D3]/70 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-sm">
           <div className="space-y-3 max-w-2xl text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
               <LagoExpertLogo variant="circle-only" className="w-8 h-8 shadow-sm border border-[#FFD8BF]/60" />
@@ -195,7 +304,7 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
               <span className="text-slate-500 font-bold text-xs uppercase tracking-wider mt-1 block">Rápido</span>
             </div>
             <div className="bg-white border border-slate-100 p-4 rounded-2xl shadow-sm text-center">
-              <span className="text-[#0D47A1] text-xl font-black block leading-none">Original</span>
+              <span className="text-[#2563EB] text-xl font-black block leading-none">Original</span>
               <span className="text-slate-500 font-bold text-xs uppercase tracking-wider mt-1 block">Garantizado</span>
             </div>
           </div>

@@ -30,13 +30,65 @@ import {
   Laptop,
   Maximize2,
   Facebook,
-  Instagram
+  Keyboard,
+  Mouse,
+  Usb,
+  Headphones,
+  Plug,
+  FileText
 } from "lucide-react";
 import { PRINTER_MODELS, REVIEWS, FAQS, PrinterModel } from "./data";
 import FloatingButtons from "./components/FloatingButtons";
 import CyberServices from "./components/CyberServices";
 import LightboxModal from "./components/LightboxModal";
 import LagoExpertLogo from "./components/LagoExpertLogo";
+
+const GeniusMouseSvg = ({ className = "w-28 h-28" }: { className?: string }) => (
+  <svg viewBox="0 0 200 240" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="205" rx="55" ry="15" fill="black" fillOpacity="0.3" />
+    
+    {/* Ergonomic mouse base */}
+    <path 
+      d="M50,110 C50,60 70,40 100,40 C130,40 150,60 150,110 C150,160 142,200 100,200 C58,200 50,160 50,110 Z" 
+      fill="#121212" 
+      stroke="#1E293B" 
+      strokeWidth="2" 
+    />
+    
+    {/* Red curves on side - iconic match for Genius NX-7007 Red/Black */}
+    <path 
+      d="M50,110 C50,75 58,65 66,70 C62,85 61,125 68,150 C71,160 67,170 58,180 C52,170 50,145 50,110 Z" 
+      fill="#DC2626" 
+    />
+    <path 
+      d="M150,110 C150,75 142,65 134,70 C138,85 139,125 132,150 C129,160 133,170 142,180 C148,170 150,145 150,110 Z" 
+      fill="#DC2626" 
+    />
+
+    {/* Center wheel line & wheel */}
+    <line x1="100" y1="40" x2="100" y2="100" stroke="#222" strokeWidth="2.5" />
+    <rect x="96" y="55" width="8" height="24" rx="4" fill="#DC2626" />
+    <line x1="100" y1="59" x2="100" y2="75" stroke="#FCA5A5" strokeWidth="2" />
+    
+    {/* Palm resting panel highlights */}
+    <path 
+      d="M65,115 C65,80 78,75 100,75 C122,75 135,80 135,115 C135,150 126,188 100,188 C74,188 65,150 65,115 Z" 
+      fill="url(#mouseBodyGrad)" 
+      opacity="0.95"
+    />
+    <defs>
+      <linearGradient id="mouseBodyGrad" x1="100" y1="75" x2="100" y2="188" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#2D2D2D" />
+        <stop offset="50%" stopColor="#1E1E1E" />
+        <stop offset="100%" stopColor="#0B0B0B" />
+      </linearGradient>
+    </defs>
+
+    {/* Genius logo eye representation */}
+    <circle cx="100" cy="155" r="4.5" fill="#E65100" />
+    <rect x="97" y="152.5" width="6" height="5" rx="1" fill="white" opacity="0.3" />
+  </svg>
+);
 
 export default function App() {
   // Configurable Shop Settings saved to localStorage - Default phone updated as requested
@@ -180,9 +232,7 @@ export default function App() {
   // Social handles definitions
   const socialLinks = {
     whatsapp: `https://wa.me/${whatsappNumber}`,
-    facebook: "https://www.facebook.com/share/p/lagoexpertpc",
-    instagram: "https://www.instagram.com/lagoexpertpc",
-    tiktok: "https://www.tiktok.com/@lagoexpertpc"
+    facebook: "https://www.facebook.com/compuexpertpc/?locale=es_LA"
   };
 
   return (
@@ -266,6 +316,9 @@ export default function App() {
               <span className="block text-[9px] md:text-[11px] uppercase tracking-widest font-extrabold text-[#E65100] leading-none mt-1.5">
                 Servicios Tecnológicos, Cyber e Insumos
               </span>
+              <span className="block text-[8px] md:text-[9.5px] uppercase font-bold text-slate-500 tracking-tight mt-1 items-center gap-1">
+                📍 C.C. 11 de Marzo · 2do Piso · Local 22
+              </span>
             </div>
           </a>
 
@@ -281,28 +334,6 @@ export default function App() {
               title="Síguenos en Facebook"
             >
               <Facebook className="w-4 h-4" />
-            </a>
-
-            <a 
-              href={socialLinks.instagram} 
-              target="_blank" 
-              rel="noreferrer"
-              className="w-9 h-9 flex items-center justify-center bg-[#FDF0F5] border border-[#FCE2EC] text-[#E1306C] hover:bg-[#FCE2EC] rounded-full transition-all hover:scale-110 cursor-pointer shadow-sm"
-              title="Síguenos en Instagram"
-            >
-              <Instagram className="w-4 h-4" />
-            </a>
-
-            <a 
-              href={socialLinks.tiktok} 
-              target="_blank" 
-              rel="noreferrer"
-              className="w-9 h-9 flex items-center justify-center bg-zinc-50 border border-zinc-200 text-zinc-850 hover:bg-zinc-200 rounded-full transition-all hover:scale-110 cursor-pointer shadow-sm"
-              title="Síguenos en TikTok"
-            >
-              <svg fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.94-1.74-.22-.2-.41-.43-.61-.65-.01.01-.01.01-.02.02v6.64c.03 2.24-1.02 4.41-2.92 5.54-1.9 1.13-4.41 1.25-6.39.29-1.99-.97-3.23-3.15-3.08-5.38.14-2.11 1.57-4.04 3.63-4.57 1.19-.31 2.47-.13 3.53.47.01-1.13.01-6.57.01-7.7-.13.02-.27.03-.4.06-1.51.3-2.82 1.4-3.32 2.87-.5 1.47-.23 3.19.68 4.4 1 1.33 2.67 1.95 4.29 1.7V8.12c-.52.06-1.05-.04-1.5-.31-.56-.34-.91-.95-.91-1.61 0-.66.35-1.27.91-1.61.42-.25.92-.35 1.41-.31.14.01.29.04.43.08V.02z" />
-              </svg>
             </a>
 
             <a 
@@ -328,160 +359,421 @@ export default function App() {
         </div>
       </header>
 
-      {/* HERO SECTION - REFINED ULTRA-DENSE WITH MASSIVE TYPOGRAPHY & LIGHTBOX IMAGE */}
-      <section className="relative bg-gradient-to-br from-[#FFF5EE] via-[#EAF4FF] to-[#FAF8F5] py-16 md:py-24 lg:py-32 overflow-hidden text-slate-800 border-b border-light-100">
+      {/* HERO SECTION - CORPORATE BANNER INSPIRED ULTRA-POLISHED MULTI-PANEL VIEW */}
+      <section className="relative bg-white py-12 md:py-16 lg:py-24 overflow-hidden border-b border-slate-100">
         
-        {/* Glow Spheres */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gradient-to-b from-[#0D47A1]/5 via-[#E65100]/5 to-transparent pointer-events-none blur-3xl"></div>
-        <div className="absolute -left-20 top-1/4 w-[350px] h-[350px] bg-[#BBDEFB]/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -right-20 bottom-1/4 w-[350px] h-[350px] bg-[#FFE0B2]/20 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="max-w-7xl mx-auto px-4 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+        {/* Exact diagonal background splitter to represent the corporate banner */}
+        <div className="absolute inset-0 pointer-events-none z-0 hidden lg:block overflow-hidden">
+          {/* Left panel is white, right panel is dark navy */}
+          <div className="absolute inset-y-0 left-0 w-[45%] bg-white"></div>
           
-          {/* Hero text */}
-          <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+          {/* Diagonal Orange stripe divider */}
+          <div 
+            className="absolute inset-y-0 bg-[#E65100]" 
+            style={{ left: '44.2%', width: '1.4%', transform: 'skewX(-16deg)' }}
+          ></div>
+          
+          {/* Diagonal Blue stripe divider */}
+          <div 
+            className="absolute inset-y-0 bg-[#4FC3F7]" 
+            style={{ left: '45.6%', width: '1.4%', transform: 'skewX(-16deg)' }}
+          ></div>
+          
+          {/* Right Navy Panel background */}
+          <div 
+            className="absolute inset-y-0 right-0 bg-[#B3E5FC]"
+            style={{ left: '46.7%', right: 0 }}
+          ></div>
+        </div>
+
+        {/* Dynamic decorative backdrop for smaller touch displays */}
+        <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-slate-900/5 to-transparent pointer-events-none lg:hidden"></div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          
+          {/* Left column content - High readability over white background */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
             
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-black tracking-wider uppercase text-[#E65100] bg-[#FFF3EC] border border-[#FFD8BF] rounded-full shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 fill-current text-[#E65100] animate-pulse" />
-              ¡Las Tintas Epson Oficiales que tu Equipo Reclama!
-            </span>
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 items-center lg:items-start">
+              {/* EPSON printer blue square badge from the top-left of the banner */}
+              <div className="flex items-center gap-2 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-xl shadow-sm border border-blue-600 scale-95 md:scale-100 transition-transform">
+                <Printer className="w-4 h-4 text-white animate-pulse" />
+                <span className="font-black text-[11px] tracking-wider uppercase font-mono">EPSON REFILLS</span>
+              </div>
+              
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[10px] font-black tracking-wider uppercase text-[#E65100] bg-[#FFF3EC] border border-[#FFD8BF] rounded-full shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 fill-current text-[#E65100]" />
+                ¡Distribuidor Autorizado Lago Agrio!
+              </span>
+            </div>
             
-            {/* Massive Heading */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
-              <span className="block text-2xl md:text-3xl font-extrabold text-slate-500 tracking-normal mb-1">
+            {/* Massive Heading customized to match the brand identity */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6.5xl font-black tracking-tight leading-none text-slate-900">
+              <span className="block text-lg md:text-xl font-extrabold text-[#2563EB] uppercase tracking-widest mb-1.5">
                 Bienvenido a
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#0D47A1] via-[#1E88E5] to-[#E65100] hover:brightness-110 cursor-default transition-all duration-300">
+              <span className="block text-slate-950 font-black tracking-tight">
                 LAGO EXPERT PC
               </span>
-              <span className="block text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#E65100] tracking-tight mt-1.5">
+              <span className="block text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#E65100] mt-1.5">
                 4 Tintas Epson por ${basicPrice}
               </span>
             </h1>
 
-            <p className="text-slate-600 font-medium text-base md:text-lg leading-relaxed max-w-xl">
-              Carga tus tanques con confianza. Distribución autorizada de botellas de recarga de altísima pureza para la serie Ecotank 544, 664, 504 y más. Colores vivos, protección absoluta de inyectores y garantía real.
+            <p className="text-slate-600 font-medium text-sm md:text-md leading-relaxed max-w-lg">
+              Carga tus tanques con absoluta confianza. Distribución autorizada de botellas de recarga de altísima pureza. Un <strong>set universal compatible para todo tipo de impresoras Epson</strong> (Serie 544, 664, 504 e inyectores térmicos). Colores vivos, protección y garantía física de Luis Pallo.
             </p>
 
             {/* Price badge block */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-md max-w-md w-full">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 p-4.5 bg-slate-50 border border-slate-150 rounded-2xl shadow-xs max-w-sm w-full">
               <div className="text-left">
-                <span className="block text-[10px] text-slate-400 font-extrabold uppercase tracking-widest">Precio Normal</span>
-                <span className="text-lg text-slate-400 line-through font-bold leading-none">$30.00</span>
+                <span className="block text-[8px] text-slate-400 font-extrabold uppercase tracking-widest leading-none">Precio Normal</span>
+                <span className="text-md text-slate-400 line-through font-bold leading-none">$30.00</span>
               </div>
-              <div className="h-8 w-px bg-slate-100"></div>
+              <div className="h-8 w-px bg-slate-200"></div>
               <div className="text-left flex-1">
                 <span className="block text-[10px] text-[#E65100] font-extrabold uppercase tracking-widest">Promoción Temporal</span>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-slate-800">$15.00</span>
-                  <span className="text-[11px] text-slate-500 font-bold font-mono">Set Completo Original</span>
+                  <span className="text-3xl font-black text-slate-800">$15.00</span>
+                  <span className="text-[10px] text-slate-500 font-bold">Set Completo 4 Colores</span>
                 </div>
               </div>
             </div>
 
             {/* Quick action triggers */}
-            <div className="flex flex-col sm:flex-row gap-3.5 w-full sm:w-auto pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pt-1">
               <a 
                 href="#cotizar" 
-                className="inline-flex items-center justify-center gap-2 px-8 py-4.5 bg-[#E65100] hover:bg-orange-700 active:scale-95 text-white font-black rounded-2xl shadow-md shadow-orange-200/40 transition-all text-base uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#E65100] hover:bg-orange-700 active:scale-95 text-white font-black rounded-xl shadow-md transition-all text-xs uppercase tracking-wider cursor-pointer"
               >
-                <ShoppingBag className="w-5 h-5 fill-white" />
+                <ShoppingBag className="w-4 h-4 fill-white" />
                 Quiero las 4 tintas
               </a>
               <a 
                 href="#cyber-services" 
-                className="inline-flex items-center justify-center gap-2 px-8 py-4.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl transition-all text-base border border-slate-200 shadow-sm uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all text-xs border border-slate-200 shadow-xs uppercase tracking-wider cursor-pointer"
               >
-                <Laptop className="w-5 h-5 text-[#E65100]" />
-                Ver Servicios Cyber
+                <Laptop className="w-4 h-4 text-[#E65100]" />
+                Servicios y Cyber
               </a>
             </div>
 
-            {/* Minimal banner elements indicators */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 pt-4 text-xs font-bold text-slate-500 uppercase">
-              <div className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-emerald-605" strokeWidth={3} />
+            {/* Support checkmarks */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2 text-[11px] font-extrabold text-slate-500 uppercase tracking-wide">
+              <div className="flex items-center gap-1">
+                <Check className="w-3.5 h-3.5 text-emerald-600" strokeWidth={3} />
                 <span>Epson Original Spec</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-emerald-605" strokeWidth={3} />
-                <span>Garantía de Reposición</span>
+              <div className="flex items-center gap-1">
+                <Check className="w-3.5 h-3.5 text-emerald-600" strokeWidth={3} />
+                <span>Garantía de Luis Pallo</span>
               </div>
             </div>
 
           </div>
 
-          {/* Hero Image Card */}
-          <div className="lg:col-span-6 relative mt-10 lg:mt-0 flex flex-col items-center">
-            {/* Animated attention-seeker */}
-            <span className="absolute -top-3 right-6 bg-[#E65100] text-white font-extrabold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full shadow-md z-20 animate-bounce">
+          {/* Right column content - Dark navy block displaying actual banner composition dynamically */}
+          <div className="lg:col-span-7 relative mt-6 lg:mt-0 flex flex-col items-center">
+            
+            {/* Animated zoom alert callout indicator on inks frame */}
+            <span className="absolute -top-3.5 right-6 bg-[#E65100] text-white font-extrabold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md z-20 animate-bounce cursor-default select-none">
               ¡Haz clic para ampliar!
             </span>
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#FFE0B2]/10 via-[#BBDEFB]/10 to-transparent rounded-3xl blur-2xl pointer-events-none"></div>
             
-            {/* Giant interactive image showcase container */}
-            <motion.div 
-              initial={{ scale: 0.96, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.55 }}
-              onClick={() => setIsLightboxOpen(true)}
-              className="relative w-full max-w-xl bg-white border border-slate-100 rounded-3xl p-5 overflow-hidden shadow-xl hover:border-slate-200 transition-all duration-300 cursor-zoom-in group"
-            >
-              {/* Product photo frame with zoom icon */}
-              <div className="relative aspect-[4/3] rounded-2xl bg-slate-50 overflow-hidden">
-                <img 
-                  src="/src/assets/images/epson_544_inks_set_1780017725073.png"
-                  alt="Official Epson Ecotank series 544 ink bottles (Black, Cyan, Magenta, Yellow)" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Brand Seal Overlapping bottom left corner certifying authenticity - enlarged for premium impact */}
-                <div className="absolute top-4 left-4 z-10 w-24 h-24 pointer-events-none">
-                  <LagoExpertLogo variant="circle-only" className="w-24 h-24 shadow-xl border-2 border-white scale-100 hover:scale-110 transition-transform duration-300" />
-                </div>
+            {/* Dynamic, responsive re-creation of the corporate banner's right side (Light Pastel with Inks, Mouse, Flash, Paper, Keyboard, and Wireless Mouse) */}
+            <div className="relative w-full max-w-xl bg-gradient-to-b from-[#E0F2FE] via-[#B3E5FC] to-[#81D4FA] border-2 border-blue-200/60 rounded-3xl p-5 overflow-hidden shadow-xl flex flex-col justify-between h-auto min-h-[580px] lg:min-h-[510px] group transition-all duration-300 hover:border-blue-300/80">
+              
+              {/* Background circular glowing atmospheres */}
+              <div className="absolute top-0 right-0 w-44 h-44 bg-blue-400/20 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-44 h-44 bg-orange-400/15 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent"></div>
-                
-                {/* Expand Hover UI Control */}
-                <div className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur rounded-xl text-slate-800 opacity-80 group-hover:opacity-100 transition shadow-sm">
-                  <Maximize2 className="w-4 h-4 text-[#E65100]" />
-                </div>
-
-                <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
-                  <div className="space-y-1">
-                    <h4 className="text-base font-black text-white tracking-wide drop-shadow-md">Set de Tintas CMYK Epson</h4>
-                    <p className="text-xs text-[#FFEBE0] font-bold uppercase tracking-wider drop-shadow-sm">Distribución 100% Confiable</p>
-                  </div>
-                  <span className="px-3.5 py-1.5 bg-[#E65100] font-black text-xs text-white rounded-xl shadow-md border border-orange-500 flex-shrink-0">
-                    70ml por botella
+              {/* Header inside simulated banner */}
+              <div className="flex justify-between items-center relative z-10 pb-2 border-b border-blue-200/50">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-[#E65100] bg-[#FFF3EC] border border-[#FFD8BF] px-2 py-0.5 rounded">
+                    LAGO EXPERT PC
                   </span>
                 </div>
-              </div>
-
-              {/* Specs pill badges below picture - updated with delightful combination of pastel colors */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-center text-xs">
-                <div className="bg-[#ECEFF1] border border-[#CFD8DC] p-2.5 rounded-xl">
-                  <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[9px]">Negro Black</span>
-                  <span className="block font-black text-slate-800 mt-0.5">Epson K</span>
-                </div>
-                <div className="bg-[#E3F2FD] border border-[#BBDEFB] p-2.5 rounded-xl">
-                  <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[9px]">Cian Cyan</span>
-                  <span className="block font-black text-[#0D47A1] mt-0.5">Epson C</span>
-                </div>
-                <div className="bg-[#FCE4EC] border border-[#F8BBD0] p-2.5 rounded-xl">
-                  <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[9px]">Mag Magenta</span>
-                  <span className="block font-black text-[#880E4F] mt-0.5">Epson M</span>
-                </div>
-                <div className="bg-[#FFF8E1] border border-[#FFE082] p-2.5 rounded-xl">
-                  <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[9px]">Yel Yellow</span>
-                  <span className="block font-black text-[#FF6F00] mt-0.5">Epson Y</span>
+                
+                {/* Official standard EPSON original certification header */}
+                <div className="flex items-center gap-1 px-3 py-1 bg-[#0D47A1] rounded-lg border border-blue-600">
+                  <span className="text-white font-black text-[10px] tracking-wider uppercase font-mono">PRODUCTOS ESTRELLA</span>
                 </div>
               </div>
 
-            </motion.div>
+              {/* Product items display showcase - Responsive grid 2 columns on mobile, 3 columns on sm+ */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 items-center flex-1 relative z-10 my-3">
+                
+                {/* 1. Epson Ink Bottles set */}
+                <div 
+                  onClick={() => setIsLightboxOpen(true)}
+                  className="flex flex-col items-center justify-center p-2 bg-white hover:bg-slate-50 border border-blue-100 rounded-2xl cursor-zoom-in transition-all duration-350 relative group/ink text-center shadow-md hover:shadow-lg h-[135px]"
+                >
+                  {/* Floating Price Badge */}
+                  <span className="absolute top-1.5 right-1.5 bg-orange-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-md z-10 border border-orange-500 tracking-wider">
+                    $15.00
+                  </span>
+
+                  <img 
+                    src="/src/assets/images/epson_544_inks_set_1780017725073.png" 
+                    alt="Colección de 4 Tintas Epson CMYK" 
+                    className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(13,71,161,0.2)] group-hover/ink:scale-105 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span className="mt-1.5 text-[8.5px] font-black tracking-wider text-[#0D47A1] uppercase bg-[#B3E5FC] border border-[#81D4FA] px-1.5 py-0.5 rounded">
+                    Tintas x4: $15.00
+                  </span>
+                </div>
+
+                {/* 2. Red & Black Genius NX-7007 Mouse */}
+                <a 
+                  href="#accesorios"
+                  className="flex flex-col items-center justify-center p-2 bg-white hover:bg-slate-50 border border-blue-100 rounded-2xl transition-all duration-350 relative group/mouse text-center shadow-md hover:shadow-lg h-[135px]"
+                >
+                  {/* Floating Price Badge */}
+                  <span className="absolute top-1.5 right-1.5 bg-red-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-md z-10 border border-red-500 tracking-wider">
+                    $5.00
+                  </span>
+                  
+                  <img 
+                    src="/src/assets/images/genius_mouse_nx7007_png_1780095087125.png" 
+                    alt="Mouse Wireless Genius NX-7007 Rojo/Negro" 
+                    className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(220,38,38,0.2)] group-hover/mouse:scale-105 transition-transform duration-500 rounded-xl"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  <span className="mt-1.5 text-[8.5px] font-black tracking-wider text-red-700 uppercase bg-red-50 border border-red-200 px-1.5 py-0.5 rounded flex items-center justify-center gap-1 hover:bg-red-100 transition-all">
+                    Mouse Genius: $5.00
+                  </span>
+                </a>
+
+                {/* 3. Mouse inalámbrico de $10.00 */}
+                <a 
+                  href="#accesorios"
+                  className="flex flex-col items-center justify-center p-2 bg-white hover:bg-slate-50 border border-blue-100 rounded-2xl transition-all duration-350 relative group/wirelessmouse text-center shadow-md hover:shadow-lg h-[135px]"
+                >
+                  {/* Floating Price Badge */}
+                  <span className="absolute top-1.5 right-1.5 bg-sky-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-md z-10 border border-sky-500 tracking-wider">
+                    $10.00
+                  </span>
+                  
+                  <img 
+                    src="/src/assets/images/mouse_inalambrico_10_00_1780097360929.png" 
+                    alt="Mouse Inalámbrico Premium Ergonómico" 
+                    className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(13,148,136,0.2)] group-hover/wirelessmouse:scale-105 transition-transform duration-500 rounded-xl"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  <span className="mt-1.5 text-[8.5px] font-black tracking-wider text-sky-850 uppercase bg-sky-50 border border-sky-200 px-1.5 py-0.5 rounded flex items-center justify-center gap-1 hover:bg-sky-100 transition-all font-sans">
+                    Mouse Inalám.: $10.00
+                  </span>
+                </a>
+
+                {/* 4. Teclado Quasad de $10.00 */}
+                <a 
+                  href="#accesorios"
+                  className="flex flex-col items-center justify-center p-2 bg-white hover:bg-slate-50 border border-blue-100 rounded-2xl transition-all duration-350 relative group/keyboard text-center shadow-md hover:shadow-lg h-[135px]"
+                >
+                  {/* Floating Price Badge */}
+                  <span className="absolute top-1.5 right-1.5 bg-amber-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-md z-10 border border-amber-500 tracking-wider font-sans">
+                    $10.00
+                  </span>
+                  
+                  <img 
+                    src="/src/assets/images/teclado_quasad_10_00_1780097377386.png" 
+                    alt="Teclado Quasad Español" 
+                    className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(217,119,6,0.2)] group-hover/keyboard:scale-105 transition-transform duration-500 rounded-xl"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  <span className="mt-1.5 text-[8.5px] font-black tracking-wider text-amber-800 uppercase bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded flex items-center justify-center gap-1 hover:bg-amber-100 transition-all">
+                    Teclado Quasad: $10.00
+                  </span>
+                </a>
+
+                {/* 5. Flash Memory 16GB */}
+                <a 
+                  href="#accesorios"
+                  className="flex flex-col items-center justify-center p-2 bg-white hover:bg-slate-50 border border-blue-100 rounded-2xl transition-all duration-350 relative group/flash text-center shadow-md hover:shadow-lg h-[135px]"
+                >
+                  {/* Floating Price Badge */}
+                  <span className="absolute top-1.5 right-1.5 bg-emerald-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-md z-10 border border-emerald-500 tracking-wider">
+                    $10.00
+                  </span>
+                  
+                  <img 
+                    src="/src/assets/images/flash_memory_16gb_1780096972830.png" 
+                    alt="Flash Memory Kingston 16GB CD-ROM" 
+                    className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(16,185,129,0.2)] group-hover/flash:scale-105 transition-transform duration-500 rounded-xl"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  <span className="mt-1.5 text-[8.5px] font-black tracking-wider text-emerald-800 uppercase bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded flex items-center justify-center gap-1 hover:bg-emerald-100 transition-all">
+                    Flash 16GB: $10.00
+                  </span>
+                </a>
+
+                {/* 6. Resmas de Papel */}
+                <a 
+                  href="#accesorios"
+                  className="flex flex-col items-center justify-center p-2 bg-white hover:bg-slate-50 border border-blue-100 rounded-2xl transition-all duration-350 relative group/paper text-center shadow-md hover:shadow-lg h-[135px]"
+                >
+                  {/* Floating Price Badge */}
+                  <span className="absolute top-1.5 right-1.5 bg-indigo-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-md z-10 border border-indigo-500 tracking-wider">
+                    $3.50
+                  </span>
+                  
+                  <img 
+                    src="/src/assets/images/resma_papel_3_50_1780096987801.png" 
+                    alt="Resma de Papel A4 Report Premium" 
+                    className="h-16 object-contain drop-shadow-[0_4px_10px_rgba(99,102,241,0.2)] group-hover/paper:scale-105 transition-transform duration-500 rounded-xl"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  <span className="mt-1.5 text-[8.5px] font-black tracking-wider text-indigo-700 uppercase bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded flex items-center justify-center gap-1 hover:bg-indigo-100 transition-all font-sans">
+                    Resma Papel: $3.50
+                  </span>
+                </a>
+
+              </div>
+
+              {/* Bottom corporate banner strip with Epson brand and vision */}
+              <div className="pt-2 border-t border-blue-200/50 flex items-center justify-between relative z-10">
+                <div className="text-left">
+                  <span className="block text-[8px] text-slate-500 font-extrabold uppercase tracking-widest leading-none">Canal de Ventas</span>
+                  <span className="text-xs font-black text-slate-800 mt-1 block">Insumos y Cyber</span>
+                </div>
+                
+                {/* Logo emblem */}
+                <div className="bg-[#0D47A1] text-white px-3 py-1.5 rounded-md border border-sky-400/20 text-center flex flex-col justify-center select-none shadow">
+                  <span className="font-black text-[10px] uppercase leading-none font-sans tracking-wide">EXPERT MULTY</span>
+                  <span className="text-[5px] tracking-widest font-black uppercase mt-1 text-sky-200">EQUIPOS Y SERVICIOS</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Interactive mini badges underneath describing what is modeled */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4 text-center text-[10px] w-full max-w-xl">
+              <div className="bg-slate-50 border border-slate-250 p-2.5 rounded-xl">
+                <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[8px]">Black K</span>
+                <span className="block font-black text-slate-800 mt-0.5">Epson 544 K</span>
+              </div>
+              <div className="bg-[#B3E5FC] border border-[#81D4FA] p-2.5 rounded-xl">
+                <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[8px]">Cyan C</span>
+                <span className="block font-black text-[#0D47A1] mt-0.5">Epson 544 C</span>
+              </div>
+              <div className="bg-[#FCE4EC] border border-[#F8BBD0] p-2.5 rounded-xl">
+                <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[8px]">Magenta M</span>
+                <span className="block font-black text-[#880E4F] mt-0.5">Epson 544 M</span>
+              </div>
+              <div className="bg-[#FFF8E1] border border-[#FFE082] p-2.5 rounded-xl">
+                <span className="block text-slate-500 font-extrabold uppercase tracking-wider text-[8px]">Yellow Y</span>
+                <span className="block font-black text-[#FF6F00] mt-0.5">Epson 544 Y</span>
+              </div>
+            </div>
+
           </div>
 
+        </div>
+      </section>
+
+      {/* COMPUTER ACCESSORIES CATALOG SECTION */}
+      <section id="accesorios" className="py-20 bg-[#FFFBF8] border-t border-b border-[#FFE0D3]/40 relative overflow-hidden">
+        {/* Glow dots */}
+        <div className="absolute top-0 right-10 w-64 h-64 bg-orange-100/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-10 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-black tracking-widest uppercase text-[#0D47A1] bg-[#B3E5FC] border border-[#81D4FA] rounded-full shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Súper Equipado
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">
+              Venta de Accesorios de Computadora e Insumos
+            </h2>
+            <p className="text-slate-600 md:text-base leading-relaxed font-light">
+              ¡Mejora tu estación de trabajo o estudio! Tenemos una amplia selección de accesorios e implementos de computación para entrega inmediata en Lago Agrio. Todos con garantía física y probados antes de que los lleves.
+            </p>
+          </div>
+
+          {/* Grid setup */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: <Mouse className="w-6 h-6 text-[#0D47A1]" />,
+                iconBg: "bg-[#B3E5FC] border-[#81D4FA]",
+                title: "Mouse Genius NX-7007",
+                desc: "Original, ergonómico e inalámbrico de alta velocidad",
+                priceText: "$5.00"
+              },
+              {
+                icon: <Mouse className="w-6 h-6 text-emerald-700" />,
+                iconBg: "bg-emerald-50 border-emerald-100",
+                title: "Mouse Inalámbrico",
+                desc: "Conexión estable USB de largo alcance para laptop o PC",
+                priceText: "$10.00"
+              },
+              {
+                icon: <Keyboard className="w-6 h-6 text-[#E65100]" />,
+                iconBg: "bg-[#FFF3EC] border-[#FFD8BF]",
+                title: "Teclado Quasad",
+                desc: "Distribución en español con Ñ, multimedia USB de alta suavidad",
+                priceText: "$10.00"
+              },
+              {
+                icon: <FileText className="w-6 h-6 text-indigo-700" />,
+                iconBg: "bg-indigo-50 border-indigo-150",
+                title: "Resma de Papel A4",
+                desc: "500 hojas de papel bond blanco ultra brillante de excelente gramaje",
+                priceText: "$3.50"
+              },
+              {
+                icon: <Usb className="w-6 h-6 text-teal-800" />,
+                iconBg: "bg-teal-50 border-teal-100",
+                title: "Flash de Memory 16GB",
+                desc: "Pendrive Kingston o Adata de alta transferencia original",
+                priceText: "$10.00"
+              },
+              {
+                icon: <Headphones className="w-6 h-6 text-pink-700" />,
+                iconBg: "bg-pink-50 border-pink-100",
+                title: "Audífonos y Diademas",
+                desc: "Sonido nítido para clases, videollamadas, oficina y música",
+                priceText: "Desde $12.00"
+              }
+            ].map((acc, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="bg-white border border-slate-100 p-5 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all text-center relative overflow-hidden"
+              >
+                {/* Floating Price label block inside card */}
+                <div className="absolute top-2 right-2 bg-slate-100 text-[#0D47A1] text-[9px] font-extrabold px-2 py-0.5 rounded-md border border-slate-200">
+                  {acc.priceText}
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center border ${acc.iconBg} mb-3 shadow-inner`}>
+                    {acc.icon}
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-sm">{acc.title}</h4>
+                  <p className="text-slate-500 text-[11px] mt-1 leading-snug">{acc.desc}</p>
+                </div>
+                <div className="pt-4 mt-3 border-t border-slate-100">
+                  <a
+                    href={`https://wa.me/${whatsappNumber}?text=Hola Luis! Me interesa consultar disponibilidad o precio de accesorios de computadora, específicamente: *${encodeURIComponent(acc.title)}*`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[10px] text-[#E65100] hover:text-orange-700 font-extrabold uppercase mt-1 inline-block bg-[#FFF3EC] border border-[#FFD8BF] px-2 py-1.5 rounded-lg w-full tracking-wider hover:bg-orange-50 active:scale-95 transition-all cursor-pointer"
+                  >
+                    Cotizar
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -635,16 +927,16 @@ export default function App() {
                 <div className="grid grid-cols-4 gap-2">
                   {(["K", "C", "M", "Y"] as const).map((col) => {
                     const styles = {
-                      K: { active: "bg-black text-white border-black", label: "Negro" },
-                      C: { active: "bg-sky-500 text-white border-sky-500", label: "Cian" },
-                      M: { active: "bg-pink-600 text-white border-pink-600", label: "Magen" },
-                      Y: { active: "bg-amber-400 text-slate-900 border-amber-400", label: "Amar" },
+                      K: { active: "bg-black text-white border-black ring-2 ring-slate-950/15", label: "Negro" },
+                      C: { active: "bg-sky-500 text-white border-sky-500 ring-2 ring-sky-500/15", label: "Cian" },
+                      M: { active: "bg-pink-600 text-white border-pink-600 ring-2 ring-pink-600/15", label: "Magenta" },
+                      Y: { active: "bg-amber-400 text-slate-900 border-[#E5A900] ring-2 ring-amber-400/15", label: "Amarillo" },
                     };
                     return (
                       <button
                         key={col}
                         onClick={() => setActiveColorTab(col)}
-                        className={`py-3.5 text-center font-black rounded-2xl border text-xs transition cursor-pointer shadow-sm ${
+                        className={`py-3 text-center font-black rounded-xl border text-[11px] md:text-xs transition cursor-pointer shadow-sm ${
                           activeColorTab === col ? styles[col].active : "bg-white hover:bg-slate-100 text-slate-700 border-slate-200"
                         }`}
                       >
@@ -655,49 +947,85 @@ export default function App() {
                 </div>
 
                 {/* Tab response dynamic content */}
-                <div className="bg-white border border-slate-200/80 rounded-2xl p-5 text-sm text-slate-700 min-h-[140px] flex flex-col justify-center">
+                <div className="bg-white border border-slate-200 p-5 text-sm text-slate-700 min-h-[200px] flex flex-col justify-center rounded-2xl">
                   {activeColorTab === "K" && (
-                    <div className="space-y-1">
-                      <h4 className="font-bold text-black flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-black"></span>
-                        Negro Absoluto de Alta Definición (K)
-                      </h4>
-                      <p className="text-slate-500 text-xs leading-relaxed">
-                        Formulado con resinas dispersas y microfibras de carbón que proporcionan un negro profundo ideal para documentos de oficina y cyber café. Secado ultra-rápido en papel para evitar el corrido de tinta.
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-extrabold text-slate-950 text-sm flex items-center gap-2">
+                          <span className="w-3 h-3 rounded-full bg-black shadow-inner ring-2 ring-black/15 animate-pulse"></span>
+                          Negro Absoluto de Alta Definición (K)
+                        </h4>
+                        <span className="text-[9px] uppercase font-black px-2 py-0.5 bg-black text-white rounded-md tracking-wider">Premium</span>
+                      </div>
+                      <p className="text-slate-500 text-[11px] leading-relaxed">
+                        Formulado con resinas dispersas y microfibras de carbón de altísima pureza. Brinda un negro profundo de excelente legibilidad en textos pequeños, códigos de barras e impresiones de oficina. Posee aditivos de secado ultra-rápido para prevenir corridos de tinta en hojas bond estándar.
                       </p>
+                      <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-slate-100 text-[10px] text-slate-500 font-mono">
+                        <div><strong className="text-slate-800 font-bold block">Viscosidad:</strong> 2.4 - 2.8 cPs (Estable)</div>
+                        <div><strong className="text-slate-800 font-bold block">Filtro de Pureza:</strong> Doble de 0.2 micras</div>
+                        <div><strong className="text-slate-800 font-bold block">pH Balanceado:</strong> 7.5 - 8.2 (No corrosivo)</div>
+                        <div><strong className="text-slate-800 font-bold block">Boquillas Seguras:</strong> 100% Antiobstrucción</div>
+                      </div>
                     </div>
                   )}
                   {activeColorTab === "C" && (
-                    <div className="space-y-1">
-                      <h4 className="font-bold text-sky-500 flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                        Cian Cristalino de Base Acuosa (C)
-                      </h4>
-                      <p className="text-slate-500 text-xs leading-relaxed">
-                        Fórmula hidro-solubilizada de alta pureza. No contiene sedimentos calcáreos que obstruyan los inyectores de color cian, garantizando transiciones de azul impecables en paisajes académicos.
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-extrabold text-sky-600 text-sm flex items-center gap-2">
+                          <span className="w-3 h-3 rounded-full bg-sky-500 shadow-inner ring-2 ring-sky-500/15 animate-pulse"></span>
+                          Cian Cristalino de Base Acuosa (C)
+                        </h4>
+                        <span className="text-[9px] uppercase font-black px-2 py-0.5 bg-sky-500 text-white rounded-md tracking-wider">Filtro UV</span>
+                      </div>
+                      <p className="text-slate-500 text-[11px] leading-relaxed">
+                        Fórmula hidro-solubilizada de alta pureza usando agua deionizada libre de sales minerales y sedimentos calcáreos. Al eliminar las sales que suelen cristalizar en los inyectores, salvaguarda la vida del cabezal térmico y genera degradados y cielos perfectos ideales para mapas escolares y fotos de paisajes.
                       </p>
+                      <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-slate-100 text-[10px] text-slate-500 font-mono">
+                        <div><strong className="text-slate-800 font-bold block">Viscosidad:</strong> 2.1 - 2.5 cPs (Fluido)</div>
+                        <div><strong className="text-slate-800 font-bold block">Pureza Agua:</strong> Deionizada (&lt;5μS/cm)</div>
+                        <div><strong className="text-slate-800 font-bold block">pH Balanceado:</strong> 7.2 - 7.9 (Estable)</div>
+                        <div><strong className="text-slate-800 font-bold block">Fidelidad:</strong> Delta E &lt; 1.2 (Fotorrealista)</div>
+                      </div>
                     </div>
                   )}
                   {activeColorTab === "M" && (
-                    <div className="space-y-1">
-                      <h4 className="font-bold text-pink-600 flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-                        Magenta Orgánico Brillante (M)
-                      </h4>
-                      <p className="text-slate-500 text-xs leading-relaxed">
-                        Elaborado con polímeros termotolerantes específicos para el transductor piezoeléctrico de Epson. Brinda rojos intensos, tonos de piel naturales y óptimo contraste fotográfico.
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-extrabold text-pink-600 text-sm flex items-center gap-2">
+                          <span className="w-3 h-3 rounded-full bg-pink-500 shadow-inner ring-2 ring-pink-500/15 animate-pulse"></span>
+                          Magenta Orgánico Vibrante (M)
+                        </h4>
+                        <span className="text-[9px] uppercase font-black px-2 py-0.5 bg-pink-600 text-white rounded-md tracking-wider">Antitapado</span>
+                      </div>
+                      <p className="text-slate-500 text-[11px] leading-relaxed">
+                        Elaborado con polímeros termotolerantes específicos formulados para responder a los micro-impulsos del cabezal MicroPiezo de Epson. Brinda tonos rojos intensos, fucsias vibrantes y pieles con aspecto natural sin sobrecalentar el transductor piezoeléctrico de tu impresora.
                       </p>
+                      <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-slate-100 text-[10px] text-slate-500 font-mono">
+                        <div><strong className="text-slate-800 font-bold block">Viscosidad:</strong> 2.2 - 2.6 cPs (Estable)</div>
+                        <div><strong className="text-slate-800 font-bold block">Tensión Superficial:</strong> 32-36 mN/m (Óptimo)</div>
+                        <div><strong className="text-slate-800 font-bold block">pH Balanceado:</strong> 7.4 - 8.1 (Protección)</div>
+                        <div><strong className="text-slate-800 font-bold block">Evaporación:</strong> Polímero anti-secado manguera</div>
+                      </div>
                     </div>
                   )}
                   {activeColorTab === "Y" && (
-                    <div className="space-y-1">
-                      <h4 className="font-bold text-amber-500 flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-                        Amarillo de Estabilidad Prolongada (Y)
-                      </h4>
-                      <p className="text-slate-500 text-xs leading-relaxed">
-                        Componentes resistentes a la radiación UV que frenan el desgaste físico del color bajo la luz solar normal. De esta forma, tus copias impresas e investigaciones conservarán su brillo por años.
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-extrabold text-amber-600 text-sm flex items-center gap-2">
+                          <span className="w-3 h-3 rounded-full bg-amber-400 shadow-inner ring-2 ring-amber-400/15 animate-pulse"></span>
+                          Amarillo de Estabilidad Prolongada (Y)
+                        </h4>
+                        <span className="text-[9px] uppercase font-black px-2 py-0.5 bg-amber-500 text-slate-900 rounded-md tracking-wider">Larga Vida</span>
+                      </div>
+                      <p className="text-slate-500 text-[11px] leading-relaxed">
+                        Dispersión ultra-fina complementada con bloqueadores solares de amplio espectro. Tus impresiones, hojas bond, tareas académicas y decoraciones expuestas a la luz ambiental en carteleras de Lago Agrio mantendrán su brillo, impidiendo el amarillentamiento o decoloración prematura del papel.
                       </p>
+                      <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-slate-100 text-[10px] text-slate-500 font-mono">
+                        <div><strong className="text-slate-800 font-bold block">Viscosidad:</strong> 2.1 - 2.4 cPs (Fluido)</div>
+                        <div><strong className="text-slate-800 font-bold block">Aditivo Solar:</strong> Filtro Fotoprotector UV</div>
+                        <div><strong className="text-slate-800 font-bold block">pH Balanceado:</strong> 7.2 - 7.8 (Neutro)</div>
+                        <div><strong className="text-slate-800 font-bold block">Sedimentación:</strong> 0% (Fórmula homogeneizada)</div>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -1197,10 +1525,6 @@ export default function App() {
                   <a href={socialLinks.facebook} target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-700 font-bold text-xs">
                     Facebook
                   </a>
-                  <span className="text-slate-300">|</span>
-                  <a href={socialLinks.tiktok} target="_blank" rel="noreferrer" className="text-zinc-800 hover:text-black font-bold text-xs">
-                    TikTok
-                  </a>
                 </div>
               </div>
             </div>
@@ -1299,15 +1623,7 @@ export default function App() {
           <div className="flex flex-wrap justify-center items-center gap-4 pt-10 text-slate-600 text-sm">
             <span className="text-xs font-black uppercase tracking-wider text-slate-400">Nuestras Redes:</span>
             <a href={socialLinks.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#E8F0FE] hover:bg-[#D2E3FC] text-[#1877F2] font-extrabold rounded-full border border-[#D2E3FC] transition-all hover:scale-105 shadow-sm">
-              <Facebook className="w-3.5 h-3.5" /> Facebook
-            </a>
-            <a href={socialLinks.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#FDF0F5] hover:bg-[#FCE2EC] text-[#E1306C] font-extrabold rounded-full border border-[#FCE2EC] transition-all hover:scale-105 shadow-sm">
-              <Instagram className="w-3.5 h-3.5" /> Instagram
-            </a>
-            <a href={socialLinks.tiktok} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3.5 py-1.5 bg-zinc-50 hover:bg-zinc-200 text-zinc-800 font-extrabold rounded-full border border-zinc-200 transition-all hover:scale-105 shadow-sm">
-              <svg fill="currentColor" viewBox="0 0 24 24" className="w-3.5 h-3.5">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.94-1.74-.22-.2-.41-.43-.61-.65-.01.01-.01.01-.02.02v6.64c.03 2.24-1.02 4.41-2.92 5.54-1.9 1.13-4.41 1.25-6.39.29-1.99-.97-3.23-3.15-3.08-5.38.14-2.11 1.57-4.04 3.63-4.57 1.19-.31 2.47-.13 3.53.47.01-1.13.01-6.57.01-7.7-.13.02-.27.03-.4.06-1.51.3-2.82 1.4-3.32 2.87-.5 1.47-.23 3.19.68 4.4 1 1.33 2.67 1.95 4.29 1.7V8.12c-.52.06-1.05-.04-1.5-.31-.56-.34-.91-.95-.91-1.61 0-.66.35-1.27.91-1.61.42-.25.92-.35 1.41-.31.14.01.29.04.43.08V.02z" />
-              </svg> TikTok
+              <Facebook className="w-3.5 h-3.5" strokeWidth={3} /> Facebook
             </a>
           </div>
         </div>
@@ -1324,7 +1640,7 @@ export default function App() {
         </div>
         <div className="max-w-md mx-auto space-y-3">
           <p className="text-slate-400 leading-relaxed font-light">
-            Calidad certificada, accesorios tecnológicos, mouses, teclados, cables, investigaciones escolares, recargas de celulares, copias e impresiones de alta nitidez por Luis Pallo.
+            Calidad certificada, accesorios tecnológicos, mouses, teclados, investigaciones escolares, trámites oficiales SRI e IESS, guías del Ministerio de Ambiente (MAATE), recargas de celulares, pago seguro de servicios básicos, copias e impresiones de alta nitidez por Luis Pallo.
           </p>
           <div className="flex flex-col items-center gap-1 bg-[#FFF3EC]/5 p-4 border border-[#FFD8BF]/20 rounded-2xl max-w-sm mx-auto shadow-md">
             <span className="text-[#E65100] font-extrabold text-[10px] uppercase tracking-widest flex items-center gap-1.5 justify-center">
