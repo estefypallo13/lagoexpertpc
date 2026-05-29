@@ -1,0 +1,6 @@
+{
+  "name": "Lago Expert PC Insumos",
+  "description": "Página de aterrizaje oficial de LAGO EXPERT PC. Adquiere tu set completo de 4 tintas Epson CMYK por solo $15 con garantía de calidad y atención de Luis Pallo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
