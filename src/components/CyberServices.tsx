@@ -288,7 +288,7 @@ export default function CyberServices({ whatsappNumber = "593988384767" }: Cyber
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
               <LagoExpertLogo variant="circle-only" className="w-8 h-8 shadow-sm border border-[#FFD8BF]/60" />
               <span className="text-xs bg-[#FFF3EC] border border-[#FFD8BF] text-[#E65100] px-3 py-1.5 rounded-full font-black uppercase tracking-wider inline-block">
-                Cyber & Insumos Lago Expert
+                Cyber & Insumos Lago Expert PC
               </span>
             </div>
             <h3 className="text-2xl md:text-3xl font-extrabold leading-none tracking-tight text-slate-900 mt-2">
